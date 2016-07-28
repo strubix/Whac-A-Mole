@@ -1,0 +1,20 @@
+{
+  "name": "Whac-A-Mole",
+  "homepage": "https://github.com/strubix/Whac-A-Mole",
+  "authors": [
+    "Lucas <lucas.strubi@gmail.com>"
+  ],
+  "description": "Simple Whac-A-Mole game for fun",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.1.0"
+  }
+}
