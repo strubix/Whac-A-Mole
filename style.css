@@ -66,3 +66,7 @@ nav h1 {
     margin: 0 auto;
     display: block;
 }
+
+#play:hover {
+    cursor: pointer;
+}
