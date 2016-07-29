@@ -2,21 +2,26 @@
  * Created by lucas on 28/07/2016.
  */
 
-// Turns a selected div into a gamefield
-function Game(selector){
+function Game(){
+    var self = this;
+    this.container = $('#game');
+    this.svg = $('svg');
 
-}
+    this.render = function(template){
+        for (var i = 0; i < template.length; i++) {
+            self.svg.append(template[i]);
+        }
+        self.container.html(self.container.html());
+    };
 
-function GameMenu(selector){
-
+    this.gameMenu = [
+        '<rect id="background" x="0" y="0" width="600" height="800" fill="#000"/>'
+    ]
 }
 
 // Initialise game
 $(document).ready(function () {
-    var $game = $('#game'),
-        $svg  = $('svg');
+    var game = new Game();
+    game.render(game.gameMenu);
 
-    // $svg.append('<rect id="rect1" x="160" y="10" width="60" height="60" fill="blue"/>');
-    $svg.append('<rect id="rect2" x="0" y="0" width="600" height="800" fill="#000"/>');
-    $game.html($game.html());
 });
