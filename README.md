@@ -1,2 +1,2 @@
 # whacamole.js
-Simple JQuery Whac-A-Mole game for fun :)
+A simple game using JQuery on SVG for fun :)
