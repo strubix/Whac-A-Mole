@@ -62,19 +62,9 @@ nav h1 {
     color: #fff;
 }
 
-#game {
-    position: relative;
-}
-
 #game, #game svg {
     margin: 0 auto;
     display: block;
-}
-
-#game #game_time {
-    position:absolute;
-    top: 0;
-    right: 0;
 }
 
 #play:hover {

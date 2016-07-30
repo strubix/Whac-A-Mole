@@ -11,7 +11,7 @@ function Game(){
         $('svg').empty();
         if($.isArray(template)){
             for (var i = 0; i < template.length; i++) {
-                self.svg.append(template[i]);
+                $('svg').append(template[i]);
             }
         } else {
             $('svg').append(template);
@@ -22,11 +22,10 @@ function Game(){
     this.start = function () {
         var gameTime = 0;
 
-        self.render(self.template['game']);
-        self.container.append('<h1 id="game_time">Time :</h1>')
+        self.render([self.template['game'], '<text id="game_time" text-anchor="middle" x="300" y="40" fill="#fff" font-family="Arial Black">0</text>']);
         setInterval(function() {
             gameTime++;
-            console.log(gameTime);
+            $('#game_time').html(gameTime);
         }, 1000);
     };
 
