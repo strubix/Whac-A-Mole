@@ -21,11 +21,15 @@ function Game(){
 
     this.start = function () {
         var gameTime = 0;
-
-        self.render([self.template['game'], '<text id="game_time" text-anchor="middle" x="300" y="40" fill="#fff" font-family="Arial Black">0</text>']);
+        self.render([self.template['game'],
+            '<text id="game_time" text-anchor="end" x="580" y="40" fill="#fff" font-family="Arial Black">Time : 0</text>',
+            '<text id="game_score" text-anchor="middle" x="300" y="40" fill="#fff" font-family="Arial Black">Score : 0</text>'
+        ]);
         setInterval(function() {
             gameTime++;
-            $('#game_time').html(gameTime);
+            $('svg').append(self.sprite['mole']);
+            self.container.html(self.container.html());
+            $('#game_time').html('Time : ' + gameTime);
         }, 1000);
     };
 
@@ -34,9 +38,8 @@ function Game(){
         game: '<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="300" y1="-1.346871e-008" x2="300" y2="800" gradientTransform="matrix(1 0 0 -1 0 800)"> <stop offset="0" style="stop-color:#59D1E8"/> <stop offset="1" style="stop-color:#008DC2"/> </linearGradient> <rect fill="url(#SVGID_1_)" width="600" height="800"/> <path fill="#CCDE68" d="M600,197.1v302.7L0,517.9v-375C203.8,109.1,453.3,183,600,197.1z"/> <path fill="#A1AB38" d="M600,251.8V518H0V184.3c28.5,7.7,50.2,16.4,61.7,23.7c40.1,25.5,185.8,134.8,296.9,120.2 C416,320.7,504.1,281.6,600,251.8z"/> <path fill="#808835" d="M600,300.4V800H0V361.7c121.6,15.7,238.9,46.1,337.3,44.6C418.8,405.1,522.1,343,600,300.4z"/>'
     };
 
-    this.sprites = {
-        dirt: '<path fill="#A7805E" d="M371.2,592.5l19.6,9.9l6,14.8l-12.9,4.8H375l-14.3,5l-23.4-3l-25.3,9.2l-6.3-13.2l-23.7-0.7l-26,1.7l-5.3-10 l-21-3l-2.3-11.4L242,584h19c0,0,13,4.3,14,4.3s20,5.3,20,5.3l21.3-0.3l21-2.3l21.4-2L371.2,592.5z"/></svg>',
-        mole: '<g><path fill="#916036" d="M247.6,540.2c0-35.6,28.8-64.4,64.4-64.4s64.4,28.8,64.4,64.4V604H247.6V540.2z"/><g><g><circle cx="291.9" cy="510.4" r="12.1"/><circle fill="#FFFFFF" cx="297.1" cy="506.2" r="4.2"/></g><g><circle cx="332.1" cy="510.4" r="12.1"/><circle fill="#FFFFFF" cx="337.3" cy="506.2" r="4.2"/></g></g></g><path fill="#A7805E" d="M371.2,592.5l19.6,9.9l6,14.8l-12.9,4.8H375l-14.3,5l-23.4-3l-25.3,9.2l-6.3-13.2l-23.7-0.7l-26,1.7l-5.3-10 l-21-3l-2.3-11.4L242,584h19c0,0,13,4.3,14,4.3s20,5.3,20,5.3l21.3-0.3l21-2.3l21.4-2L371.2,592.5z"/>'
+    this.sprite = {
+        mole: '<svg><g><path fill="#916036" d="M247.6,540.2c0-35.6,28.8-64.4,64.4-64.4s64.4,28.8,64.4,64.4V604H247.6V540.2z"/><g><g><circle cx="291.9" cy="510.4" r="12.1"/><circle fill="#FFFFFF" cx="297.1" cy="506.2" r="4.2"/></g><g><circle cx="332.1" cy="510.4" r="12.1"/><circle fill="#FFFFFF" cx="337.3" cy="506.2" r="4.2"/></g></g></g><path fill="#A7805E" d="M371.2,592.5l19.6,9.9l6,14.8l-12.9,4.8H375l-14.3,5l-23.4-3l-25.3,9.2l-6.3-13.2l-23.7-0.7l-26,1.7l-5.3-10 l-21-3l-2.3-11.4L242,584h19c0,0,13,4.3,14,4.3s20,5.3,20,5.3l21.3-0.3l21-2.3l21.4-2L371.2,592.5z"/></svg>',
     };
 
 
