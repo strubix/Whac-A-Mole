@@ -5,31 +5,33 @@
 function Game(){
     var self = this;
     this.container = $('#game');
-    this.svg = $('svg');
+    this.gameTime = 0;
+    this.gameScore = 0;
     this.graphics = [];
 
     this.render = function(template){
-        $('svg').empty();
+        var $svg = $('svg');
+        $svg.empty();
         if($.isArray(template)){
             for (var i = 0; i < template.length; i++) {
-                $('svg').append(template[i]);
+                $svg.append(template[i]);
             }
         } else {
-            $('svg').append(template);
+            $svg.append(template);
         }
         self.container.html(self.container.html());
     };
 
     this.start = function () {
-        var gameTime = 0;
-        self.graphics.push(self.template['game'],'<text id="game_time" text-anchor="end" x="580" y="40" fill="#fff" font-family="Arial Black">Time : 0</text>',
-            '<text id="game_score" text-anchor="middle" x="300" y="40" fill="#fff" font-family="Arial Black">Score : 0</text>');
+        self.graphics.push(self.template['game'], self.sprite['time'], self.sprite['score']);
         self.render(self.graphics);
+
         setInterval(function() {
-            gameTime++;
-            $('svg').append(self.sprite['mole']);
+            self.gameTime++;
+            self.graphics.push(self.sprite['mole']);
+            self.render(self.graphics);
             self.container.html(self.container.html());
-            $('#game_time').html('Time : ' + gameTime);
+            $('#game_time').html('Time : ' + self.gameTime);
         }, 1000);
     };
 
@@ -40,7 +42,9 @@ function Game(){
 
     this.sprite = {
         mole: '<svg><g><path fill="#916036" d="M247.6,540.2c0-35.6,28.8-64.4,64.4-64.4s64.4,28.8,64.4,64.4V604H247.6V540.2z"/><g><g><circle cx="291.9" cy="510.4" r="12.1"/><circle fill="#FFFFFF" cx="297.1" cy="506.2" r="4.2"/></g><g><circle cx="332.1" cy="510.4" r="12.1"/><circle fill="#FFFFFF" cx="337.3" cy="506.2" r="4.2"/></g></g></g><path fill="#A7805E" d="M371.2,592.5l19.6,9.9l6,14.8l-12.9,4.8H375l-14.3,5l-23.4-3l-25.3,9.2l-6.3-13.2l-23.7-0.7l-26,1.7l-5.3-10 l-21-3l-2.3-11.4L242,584h19c0,0,13,4.3,14,4.3s20,5.3,20,5.3l21.3-0.3l21-2.3l21.4-2L371.2,592.5z"/></svg>',
-    };
+        time: '<text id="game_time" text-anchor="end" x="580" y="40" fill="#fff" font-family="Arial Black">Time : 0</text>',
+        score: '<text id="game_score" text-anchor="middle" x="300" y="40" fill="#fff" font-family="Arial Black">Score : 0</text>'
+};
 
 
     // Initialise game menu
