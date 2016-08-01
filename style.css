@@ -61,12 +61,3 @@ nav h1 {
     font-size: 2em;
     color: #fff;
 }
-
-#game, #game svg {
-    margin: 0 auto;
-    display: block;
-}
-
-#play:hover {
-    cursor: pointer;
-}
