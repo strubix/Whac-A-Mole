@@ -11,7 +11,8 @@ I started this using JQuery, but then I realised that JQuery wasn't appropriated
 
 ## Installation
 
-Just run `bower install` to get ~~JQuery~~ **D3**.
+`git clone git@github.com:strubix/Whac-A-Mole.git`
+`bower install`
 
 ## License
 
