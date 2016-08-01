@@ -6,6 +6,7 @@ function Game(){
     var self = this;
     this.container = $('#game');
     this.svg = $('svg');
+    this.graphics = [];
 
     this.render = function(template){
         $('svg').empty();
@@ -21,10 +22,9 @@ function Game(){
 
     this.start = function () {
         var gameTime = 0;
-        self.render([self.template['game'],
-            '<text id="game_time" text-anchor="end" x="580" y="40" fill="#fff" font-family="Arial Black">Time : 0</text>',
-            '<text id="game_score" text-anchor="middle" x="300" y="40" fill="#fff" font-family="Arial Black">Score : 0</text>'
-        ]);
+        self.graphics.push(self.template['game'],'<text id="game_time" text-anchor="end" x="580" y="40" fill="#fff" font-family="Arial Black">Time : 0</text>',
+            '<text id="game_score" text-anchor="middle" x="300" y="40" fill="#fff" font-family="Arial Black">Score : 0</text>');
+        self.render(self.graphics);
         setInterval(function() {
             gameTime++;
             $('svg').append(self.sprite['mole']);
