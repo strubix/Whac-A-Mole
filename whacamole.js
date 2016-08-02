@@ -11,13 +11,34 @@ function Game() {
   this.gameTime = 0;
   this.gameScore = 0;
 
-  this.mainMenu = function() {
+  this.appendMole = function() {
+    function randomize(max, min) {
+      return Math.random() * (max - min) + min;
+    }
+
     self.svg.append("svg:image")
-        .attr('x', 0)
-        .attr('y', 0)
+        .attr('width', 60)
+        .attr('height', 60)
+        .attr("x", randomize(this.width - 50, 20))
+        .attr("y", randomize(this.height - 50, 150))
+        .attr("xlink:href", "svg/mole.svg")
+        .on("click", function() {
+          this.remove();
+          self.gameScore += 10;
+          d3.select("#game_score").html('Score : ' + self.gameScore);
+        });
+  };
+
+  this.setTemplate = function(file) {
+    d3.select("svg").html("");
+    self.svg.append("svg:image")
         .attr('width', self.width)
         .attr('height', self.height)
-        .attr("xlink:href", "svg/main_menu.svg");
+        .attr("xlink:href", "svg/" + file + ".svg");
+  };
+
+  this.mainMenu = function() {
+    self.setTemplate('main_menu');
     self.svg.append("text")
         .attr("id", "game_play")
         .attr("x", self.width / 2)
@@ -33,13 +54,7 @@ function Game() {
   };
 
   this.start = function() {
-    d3.select("svg").html("");
-    self.svg.append("svg:image")
-        .attr('x', 0)
-        .attr('y', 0)
-        .attr('width', self.width)
-        .attr('height', self.height)
-        .attr("xlink:href", "svg/game.svg");
+    self.setTemplate('game');
     self.svg.append("text")
         .attr("id", "game_time")
         .attr("x", self.width / 2)
@@ -49,16 +64,26 @@ function Game() {
         .attr("font-size", "1em")
         .attr("fill", "#fff")
         .text("Time : 0");
+    self.svg.append("text")
+        .attr("id", "game_score")
+        .attr("x", 50)
+        .attr("y", 40)
+        .attr("text-anchor", "left")
+        .attr("font-family", "Arial Black")
+        .attr("font-size", "1em")
+        .attr("fill", "#fff")
+        .text("Score : 0");
 
-    setInterval(function() {
+    var game = setInterval(function() {
       self.gameTime++;
       d3.select("#game_time").html('Time : ' + self.gameTime);
+      self.appendMole();
+      self.gameTime >= 30 ? clearInterval(game) : false;
     }, 1000);
   };
 
   this.mainMenu();
 }
-
 
 /* Game initialisation */
 document.addEventListener("DOMContentLoaded", function() {
