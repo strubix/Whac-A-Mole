@@ -92,15 +92,13 @@ function Game() {
       d3.select("#game_time").html('Time : ' + Math.round(self.gameTime / 1000));
       if (self.gameTime >= 30000) {
         clearInterval(game);
+        clearInterval(addMole);
         self.end();
       }
     }, 1000);
     var addMole = setInterval(function() {
       if(Math.round(Math.random()) % 2 === 0){
         self.appendMole();
-      }
-      if (self.gameTime >= 30000) {
-        clearInterval(addMole);
       }
     }, 200);
   };
