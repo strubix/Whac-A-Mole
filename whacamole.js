@@ -15,7 +15,6 @@ function Game() {
     function randomize(max, min) {
       return Math.random() * (max - min) + min;
     }
-
     self.svg.append("svg:image")
         .attr('width', 60)
         .attr('height', 60)
@@ -54,6 +53,7 @@ function Game() {
   };
 
   this.start = function() {
+    self.gameScore = 0;
     self.setTemplate('game');
     self.svg.append("text")
         .attr("id", "game_time")
@@ -74,32 +74,6 @@ function Game() {
         .attr("fill", "#fff")
         .text("Score : 0");
 
-    this.end = function() {
-      self.gameTime = 0;
-      self.setTemplate('game');
-      self.svg.append("text")
-          .attr("id", "game_score")
-          .attr("x", self.width / 2)
-          .attr("y", self.height / 2 - 30)
-          .attr("text-anchor", "middle")
-          .attr("font-family", "Arial Black")
-          .attr("font-size", "3em")
-          .attr("fill", "#fff")
-          .text('Your score : ' + self.gameScore);
-      self.svg.append("text")
-          .attr("id", "replay")
-          .attr("x", self.width / 2)
-          .attr("y", self.height / 2 + 30)
-          .attr("text-anchor", "middle")
-          .attr("font-family", "Arial Black")
-          .attr("font-size", "3em")
-          .attr("fill", "#fff")
-          .text("Play again")
-          .on("click", function() {
-            self.start()
-          });
-    };
-
     var game = setInterval(function() {
       self.gameTime++;
       d3.select("#game_time").html('Time : ' + self.gameTime);
@@ -109,6 +83,32 @@ function Game() {
         self.end();
       }
     }, 1000);
+  };
+
+  this.end = function() {
+    self.gameTime = 0;
+    self.setTemplate('game');
+    self.svg.append("text")
+        .attr("id", "game_score")
+        .attr("x", self.width / 2)
+        .attr("y", self.height / 2 - 30)
+        .attr("text-anchor", "middle")
+        .attr("font-family", "Arial Black")
+        .attr("font-size", "3em")
+        .attr("fill", "#fff")
+        .text('Your score : ' + self.gameScore);
+    self.svg.append("text")
+        .attr("id", "replay")
+        .attr("x", self.width / 2)
+        .attr("y", self.height / 2 + 30)
+        .attr("text-anchor", "middle")
+        .attr("font-family", "Arial Black")
+        .attr("font-size", "3em")
+        .attr("fill", "#fff")
+        .text("Play again")
+        .on("click", function() {
+          self.start()
+        });
   };
 
   this.mainMenu();
