@@ -8,6 +8,8 @@ function Game() {
   this.container = d3.select("#game");
   this.svg = this.container.append("svg").attr("id", "main").attr("width", this.width).attr("height", this.height);
 
+  this.time = 0;
+
   this.gameTime = 0;
   this.gameScore = 0;
 
@@ -15,9 +17,11 @@ function Game() {
     function randomize(max, min) {
       return Math.random() * (max - min) + min;
     }
+    var id = "mole" + Math.random().toString(36).substring(7);
     self.svg.append("svg:image")
         .attr('width', 60)
         .attr('height', 60)
+        .attr('id', id)
         .attr("x", randomize(this.width - 50, 20))
         .attr("y", randomize(this.height - 50, 150))
         .attr("xlink:href", "svg/mole.svg")
@@ -26,6 +30,14 @@ function Game() {
           self.gameScore += 10;
           d3.select("#game_score").html('Score : ' + self.gameScore);
         });
+
+    var moleTime = randomize(self.gameTime + 5000, self.gameTime + 1000);
+    var mole = setInterval(function() {
+      if (self.gameTime >= moleTime) {
+        d3.select('#' + id).remove();
+        clearInterval(mole);
+      }
+    }, 200);
   };
 
   this.setTemplate = function(file) {
@@ -53,6 +65,7 @@ function Game() {
   };
 
   this.start = function() {
+    self.time = new Date().getTime();
     self.gameScore = 0;
     self.setTemplate('game');
     self.svg.append("text")
@@ -75,14 +88,21 @@ function Game() {
         .text("Score : 0");
 
     var game = setInterval(function() {
-      self.gameTime++;
-      d3.select("#game_time").html('Time : ' + self.gameTime);
-      self.appendMole();
-      if (self.gameTime >= 30) {
+      self.gameTime = new Date().getTime() - self.time;
+      d3.select("#game_time").html('Time : ' + Math.round(self.gameTime / 1000));
+      if (self.gameTime >= 30000) {
         clearInterval(game);
         self.end();
       }
     }, 1000);
+    var addMole = setInterval(function() {
+      if(Math.round(Math.random()) % 2 === 0){
+        self.appendMole();
+      }
+      if (self.gameTime >= 30000) {
+        clearInterval(addMole);
+      }
+    }, 200);
   };
 
   this.end = function() {
