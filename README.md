@@ -16,6 +16,7 @@ The project is now playable but still in development. Here is my task list for u
 - [ ] Animations
 - [ ] Translations
 - [ ] High Scores
+- [ ] Stats
 
 ## Installation
 
