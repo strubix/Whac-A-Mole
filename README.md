@@ -2,6 +2,8 @@
 
 A simple game using **D3** on **SVG** made for fun :)
 
+Online project : http://lucas-strubi.fr/projects/Whac-A-Mole/index.html
+
 ## About the project
 
 As a graphic designer and a beginner in web development, I wanted to try the interactivity of svg as a game using Javascript.<br />
