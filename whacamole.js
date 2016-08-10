@@ -13,6 +13,8 @@ function Game() {
   this.gameTime = 0;
   this.gameScore = 0;
 
+  this.difficulty = 4;
+
   this.appendMole = function() {
     function randomize(max, min) {
       return Math.random() * (max - min) + min;
@@ -29,6 +31,9 @@ function Game() {
           this.remove();
           self.gameScore += 10;
           d3.select("#game_score").html('Score : ' + self.gameScore);
+        })
+        .on("onmousedown", function() {
+          return false;
         });
 
     var moleTime = randomize(self.gameTime + 5000, self.gameTime + 1000);
