@@ -13,7 +13,35 @@ function Game() {
   this.gameTime = 0;
   this.gameScore = 0;
 
-  this.difficulty = 4;
+  this.difficulty = '';
+
+  this.configuration = {
+    easy: {
+      mole: {
+        size: 60,
+        spawn: 5000
+      },
+      speed: 500
+    },
+    normal: {
+      mole: {
+        size: 60,
+        spawn: 5000
+      },
+      speed: 500
+    },
+    hard: {
+      mole: {
+        size: 60,
+        spawn: 5000
+      },
+      speed: 500
+    }
+  };
+
+  this.setDifficulty = function(difficulty){
+    return self.difficulty = difficulty;
+  };
 
   this.appendMole = function() {
     function randomize(max, min) {
@@ -21,8 +49,8 @@ function Game() {
     }
     var id = "mole" + Math.random().toString(36).substring(7);
     self.svg.append("svg:image")
-        .attr('width', 60)
-        .attr('height', 60)
+        .attr('width', self.configuration[self.difficulty].mole.size)
+        .attr('height', self.configuration[self.difficulty].mole.size)
         .attr('id', id)
         .attr("x", randomize(this.width - 50, 20))
         .attr("y", randomize(this.height - 50, 150))
@@ -36,13 +64,12 @@ function Game() {
           return false;
         });
 
-    var moleTime = randomize(self.gameTime + 5000, self.gameTime + 1000);
     var mole = setInterval(function() {
-      if (self.gameTime >= moleTime) {
+      if (self.gameTime >= randomize(self.gameTime + 5000, self.gameTime + 1000)) {
         d3.select('#' + id).remove();
         clearInterval(mole);
       }
-    }, 200);
+    }, self.configuration[self.difficulty].mole.spawn);
   };
 
   this.setTemplate = function(file) {
@@ -65,7 +92,47 @@ function Game() {
         .attr("fill", "#fff")
         .text("Play")
         .on("click", function() {
-          self.start()
+          self.difficultyMenu();
+        });
+  };
+
+  this.difficultyMenu = function() {
+    self.setTemplate('main_menu');
+    self.svg.append("text")
+        .attr("x", (self.width / 2) - (self.width / 3))
+        .attr("y", (self.height / 2) - 50)
+        .attr("text-anchor", "middle")
+        .attr("font-family", "Arial Black")
+        .attr("font-size", "2em")
+        .attr("fill", "#fff")
+        .text("Easy")
+        .on("click", function() {
+          self.setDifficulty('easy');
+          self.start();
+        });
+    self.svg.append("text")
+        .attr("x", self.width / 2)
+        .attr("y", (self.height / 2) - 50)
+        .attr("text-anchor", "middle")
+        .attr("font-family", "Arial Black")
+        .attr("font-size", "2em")
+        .attr("fill", "#fff")
+        .text("Normal")
+        .on("click", function() {
+          self.setDifficulty('normal');
+          self.start();
+        });
+    self.svg.append("text")
+        .attr("x", (self.width / 2) + (self.width / 3))
+        .attr("y", (self.height / 2) - 50)
+        .attr("text-anchor", "middle")
+        .attr("font-family", "Arial Black")
+        .attr("font-size", "2em")
+        .attr("fill", "#fff")
+        .text("Hard")
+        .on("click", function() {
+          self.setDifficulty('hard');
+          self.start();
         });
   };
 
