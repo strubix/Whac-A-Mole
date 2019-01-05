@@ -1,0 +1,34 @@
+@import '~bootstrap/scss/bootstrap';
+
+body {
+    padding-top: 5rem;
+}
+
+.starter-template {
+    padding: 0 1.5rem;
+    text-align: center;
+}
+
+/* nav */
+nav {
+    height: 60px;
+    background: #008DC2;
+    padding: 0 10%;
+    margin-bottom: 50px;
+}
+
+nav h1 {
+    font-size: 2em;
+    color: #fff;
+    line-height: 60px;
+    font-weight: 300;
+}
+
+#game, #game svg {
+    margin: 0 auto;
+    display: block;
+}
+
+#game_play:hover {
+    cursor: pointer;
+}
